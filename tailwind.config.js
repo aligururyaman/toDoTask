@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // NOTE: Update this to include the paths to all of your component files.
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
@@ -24,10 +23,19 @@ module.exports = {
         customDarkPink: "#FF36F7",
         customTaskwhite: "#EDEAEA",
         customSoftBlue: "#ABDDF4",
+        customBgWhite: "#FDFDFD",
       },
       fontSize: {
         textMain: "5.5rem",
-        androidText: "3rem",
+      },
+      width: {
+        profileW: "90%",
+        indexTextW: "90%",
+      },
+      height: {
+        indexMainH: "70%",
+        loginTittleH: "25%",
+        loginInputH: "73%",
       },
     },
   },

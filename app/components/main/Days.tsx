@@ -48,7 +48,7 @@ export default function Days() {
           Today
         </Text>
       </View>
-      <View className="flex-row p-4 gap-4">
+      <View className="flex-row p-3 gap-2.5 justify-center">
         {days.map((item) => (
           <TouchableOpacity
             key={item.id}

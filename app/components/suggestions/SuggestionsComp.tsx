@@ -37,6 +37,9 @@ const SuggestionsComp: React.FC<SuggestionsCompProps> = ({
         color,
         timestamp: Timestamp.now(),
         date: selectedDate,
+        desc: "",
+        days: [],
+        tag: "",
       };
 
       try {
@@ -52,7 +55,7 @@ const SuggestionsComp: React.FC<SuggestionsCompProps> = ({
     <View>
       <View>
         <View className="pl-5">
-          <Text className="text-3xl" style={{ fontFamily: "PopMed" }}>
+          <Text className="text-2xl" style={{ fontFamily: "PopMed" }}>
             {title}
           </Text>
           <Text className="text-sm pl-2" style={{ fontFamily: "PopRegular" }}>
@@ -73,7 +76,7 @@ const SuggestionsComp: React.FC<SuggestionsCompProps> = ({
                 style={{ backgroundColor: colors[index] }}
               >
                 <Text
-                  className="text-2xl ml-5"
+                  className="text-xl ml-5"
                   style={{ fontFamily: "PopRegular" }}
                 >
                   {icon[index]}

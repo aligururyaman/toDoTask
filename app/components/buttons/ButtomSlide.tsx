@@ -7,7 +7,7 @@ export default function ButtomSlide() {
   const route = useRouter();
   return (
     <View
-      className="flex-row h-28 bg-customWhite justify-center  rounded-3xl gap-10 absolute w-[34rem]"
+      className="flex-row h-28 bg-customWhite justify-center  rounded-3xl gap-10 absolute w-[100%]"
       style={{
         shadowColor: "#000",
         shadowOffset: {

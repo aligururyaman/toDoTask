@@ -15,6 +15,22 @@ export default function _layout() {
       <Stack.Screen name="calendar/Calendar" options={{ headerShown: false }} />
       <Stack.Screen name="signUp/SignUp" options={{ headerShown: false }} />
       <Stack.Screen name="newtask/NewTask" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="profileDetail/Account"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="profileDetail/Help"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="profileDetail/Invite"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="profileDetail/StorageAndData"
+        options={{ headerShown: false }}
+      />
     </Stack>
   );
 }

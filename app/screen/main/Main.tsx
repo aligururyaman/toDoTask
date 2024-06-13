@@ -57,7 +57,7 @@ export default function Main() {
       <SafeAreaView>
         <Days />
         <Selection />
-        <View className="items-center top-3">
+        <View className="items-center top-3 h-full">
           <View className="h-16 w-[23rem] p-1 items-center gap-5">
             {filteredData.length === 0 ? (
               <View className="gap-3 top-28">
@@ -91,7 +91,7 @@ export default function Main() {
                         className={`${inline === "true" ? "bg-gray-400 h-[0.1rem] w-80 my-2 absolute" : ""}`}
                       />
                     </View>
-                    <View className="flex-row justify-between">
+                    <View className="flex-row justify-between pr-3">
                       <TouchableOpacity
                         onPress={() =>
                           setShowOptionsIndex(
@@ -99,10 +99,10 @@ export default function Main() {
                           )
                         }
                       >
-                        <View className="h-8 w-8 bg-customWhite rounded-full border border-gray-300" />
+                        <View className=" h-8 w-8 bg-customWhite rounded-full border border-gray-300" />
                       </TouchableOpacity>
                       {showOptionsIndex === index && (
-                        <View className="bg-white rounded-lg p-2 shadow-lg mt-2 -top-10 absolute -left-5">
+                        <View className="absolute bg-white rounded-lg p-2 shadow-lg mt-2 -top-32 -left-5">
                           {["Done", "Undone", "Delete"].map((option) => (
                             <TouchableOpacity
                               key={option}
@@ -122,11 +122,13 @@ export default function Main() {
             )}
           </View>
         </View>
-        <View className="absolute -bottom-[34rem] left-96">
-          <AddBtn />
-        </View>
-        <View className="absolute -bottom-[40rem]">
-          <ButtomSlide />
+        <View className="top-[12%] gap-7">
+          <View className="items-end right-5">
+            <AddBtn />
+          </View>
+          <View className="">
+            <ButtomSlide />
+          </View>
         </View>
       </SafeAreaView>
     </View>

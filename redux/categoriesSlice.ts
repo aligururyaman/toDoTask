@@ -5,11 +5,13 @@ import {
   deleteDoc,
   doc,
   DocumentData,
+  getDoc,
   getDocs,
   onSnapshot,
   orderBy,
   query,
   QuerySnapshot,
+  setDoc,
   Timestamp,
 } from "firebase/firestore";
 import { FIRESTORE_DB } from "firebaseConfig";
@@ -82,6 +84,32 @@ const initialUserDataState: UserDataState = {
   selectedDate: null, // selectedDate başlatıldı
 };
 
+export interface UserProfile {
+  name: string;
+  surName: string;
+  age: string;
+  weight: string;
+  size: string;
+}
+
+// Define the initial state for UserProfile
+interface UserProfileState {
+  profile: UserProfile;
+  loading: boolean;
+  error: string | null;
+}
+
+const initialProfileState: UserProfileState = {
+  profile: {
+    name: "",
+    surName: "",
+    age: "",
+    weight: "",
+    size: "",
+  },
+  loading: false,
+  error: null,
+};
 // Create async thunks for fetching data from Firestore
 export const fetchSuggestions = createAsyncThunk<
   Category[],
@@ -206,6 +234,7 @@ export const fetchUserData = createAsyncThunk<
       userId,
       "userData"
     );
+
     const q = query(userCollectionRef, orderBy("timestamp", "desc"));
     const querySnapshot = await getDocs(q);
     const userData: ReduxUserData[] = querySnapshot.docs.map((doc) => {
@@ -269,6 +298,57 @@ export const deleteUserData = createAsyncThunk<
   }
 );
 
+// Kullanıcı profil verilerini getir
+export const fetchUserProfile = createAsyncThunk<
+  UserProfile,
+  string,
+  { rejectValue: string }
+>("userProfile/fetchUserProfile", async (userId, { rejectWithValue }) => {
+  try {
+    const userDocRef = doc(
+      FIRESTORE_DB,
+      "users",
+      userId,
+      "userInfo",
+      "profile"
+    );
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      return docSnap.data() as UserProfile;
+    } else {
+      return { name: "", surName: "", age: "", weight: "", size: "" }; // Yeni kullanıcı için varsayılan değerler
+    }
+  } catch (error) {
+    return rejectWithValue(
+      error instanceof Error ? error.message : "Bilinmeyen hata"
+    );
+  }
+});
+
+// Kullanıcı profil verilerini güncelle
+export const updateUserProfile = createAsyncThunk<
+  void,
+  { userId: string; data: UserProfile },
+  { rejectValue: string }
+>(
+  "userProfile/updateUserProfile",
+  async ({ userId, data }, { rejectWithValue }) => {
+    try {
+      const userDocRef = doc(
+        FIRESTORE_DB,
+        "users",
+        userId,
+        "userInfo",
+        "profile"
+      );
+      await setDoc(userDocRef, data, { merge: true });
+    } catch (error) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Bilinmeyen hata"
+      );
+    }
+  }
+);
 // Create slices for categories and userData
 const categoriesSlice = createSlice({
   name: "categories",
@@ -377,6 +457,44 @@ const userDataSlice = createSlice({
   },
 });
 
+const userProfileSlice = createSlice({
+  name: "userProfile",
+  initialState: initialProfileState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchUserProfile.fulfilled,
+        (state, action: PayloadAction<UserProfile>) => {
+          state.profile = action.payload;
+          state.loading = false;
+          state.error = null;
+        }
+      )
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to fetch user profile";
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to update user profile";
+      });
+  },
+});
+
 export const { setSelectedDate } = userDataSlice.actions;
 export const userDataReducer = userDataSlice.reducer;
 export const categoriesReducer = categoriesSlice.reducer;
+export const userProfileReducer = userProfileSlice.reducer;

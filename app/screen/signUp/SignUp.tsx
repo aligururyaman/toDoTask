@@ -1,5 +1,6 @@
 import SignInBtn from "@/components/buttons/SignInBtn";
 import Or from "@/components/or/Or";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "firebaseConfig";
@@ -21,7 +22,7 @@ export default function SignUp() {
         await createUserWithEmailAndPassword(auth, email, password);
         route.push("screen/login/Login");
       } else {
-        alert("Check your information please aa");
+        alert("Check your information please");
       }
     } catch (error) {
       alert("Check your information please");
@@ -34,6 +35,25 @@ export default function SignUp() {
   return (
     <SafeAreaView>
       <View>
+        <View className="items-end mr-5 top-4">
+          <TouchableOpacity onPress={() => route.back()}>
+            <View
+              className="w-12 h-12 bg-customButton rounded-full border justify-center items-center"
+              style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
+              }}
+            >
+              <Ionicons name="arrow-back-sharp" size={28} color="black" />
+            </View>
+          </TouchableOpacity>
+        </View>
         <View className="justify-center items-center top-12 p-16 gap-4">
           <Text
             style={{ fontFamily: "PopBold" }}
@@ -67,20 +87,32 @@ export default function SignUp() {
           </TouchableOpacity>
         </View>
         <Or />
-        <View className="justify-center items-center gap-8">
-          <TextInput
-            className="top-40 bg-white w-96 h-14 rounded-lg text-2xl p-4 underline"
-            placeholder="Email"
-            onChangeText={(text) => setEmail(text)}
-          />
+        <View className="justify-center items-center gap-8 top-20">
+          <View className="  h-16 w-96 bg-customBgWhite rounded-lg justify-center p-4">
+            <TextInput
+              className="h-10 w-full text-2xl border-b border-b-gray-400 "
+              style={{
+                lineHeight: 25,
+              }}
+              placeholder="Email"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+            />
+          </View>
+          <View className="  h-16 w-96 bg-customBgWhite rounded-lg justify-center p-4">
+            <TextInput
+              className="h-10 w-full text-2xl border-b border-b-gray-400 "
+              style={{
+                lineHeight: 25,
+              }}
+              placeholder="Password"
+              secureTextEntry
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+            />
+          </View>
 
-          <TextInput
-            className="top-40 bg-white w-96 h-14 rounded-lg text-2xl p-4 underline"
-            placeholder="Password"
-            secureTextEntry
-            onChangeText={(text) => setPassword(text)}
-          />
-          <View className="top-48">
+          <View className="top-16">
             <SignInBtn
               onPress={handleAuth}
               loading={loading}

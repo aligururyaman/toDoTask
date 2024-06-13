@@ -33,7 +33,7 @@ const NewTask: React.FC = () => {
   const [selectedDaily, setSelectedDaily] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("#ADF7B6");
   const [showOptions, setShowOptions] = useState<boolean>(false);
-  const [repeatOption, setRepeatOption] = useState<string>("Every Week");
+  const [repeatOption, setRepeatOption] = useState<string>("No Repeat");
   const [selectedTag, setSelectedTag] = useState<string>("");
 
   const { user } = useAuth();
@@ -129,7 +129,7 @@ const NewTask: React.FC = () => {
     <SafeAreaView>
       <ScrollView className="bg-customBlue h-full">
         <View className="justify-center items-center h-60">
-          <Text className="text-9xl">⭐</Text>
+          <Text className="text-7xl">⭐</Text>
           <Text className="text-2xl" style={{ fontFamily: "PopMed" }}>
             New Task
           </Text>
@@ -138,20 +138,26 @@ const NewTask: React.FC = () => {
           </Text>
         </View>
         <View className="justify-center items-center gap-3">
-          <TextInput
-            className="bg-white w-96 h-14 rounded-lg text-2xl p-4 underline"
-            placeholder="Name your new task"
-            onChangeText={setNewTask}
-          />
-          <TextInput
-            className="bg-white w-96 h-14 rounded-lg text-2xl p-4 underline"
-            placeholder="Set Icon"
-            onChangeText={setDesc}
-          />
+          <View className="h-16 w-[85%] bg-customBgWhite rounded-lg justify-center p-4">
+            <TextInput
+              className="h-10 w-full text-2xl border-b border-b-gray-400 "
+              placeholder="Name your new task"
+              onChangeText={setNewTask}
+            />
+          </View>
+          <View className="h-16 w-[85%] bg-customBgWhite rounded-lg justify-center p-4">
+            <TextInput
+              className="h-10 w-full text-2xl border-b border-b-gray-400 "
+              placeholder="Set Icon"
+              onChangeText={setDesc}
+            />
+          </View>
         </View>
-        <View className="ml-12 mt-8 gap-3">
-          <Text style={{ fontFamily: "PopBold" }}>Card Color</Text>
-          <View className="flex-row gap-4">
+        <View className="mt-8 gap-3 items-center">
+          <Text style={{ fontFamily: "PopBold" }} className="">
+            Card Color
+          </Text>
+          <View className="flex-row gap-4 items-center ">
             {[
               "#ADF7B6",
               "#CA87F4",
@@ -168,7 +174,7 @@ const NewTask: React.FC = () => {
               >
                 <View
                   style={{ backgroundColor: color }}
-                  className={`h-8 w-8 rounded-full border-2 ${
+                  className={`h-9 w-9 rounded-full border-2 ${
                     selectedColor === color
                       ? "border-customBlack"
                       : "border-customWhite"
@@ -178,7 +184,7 @@ const NewTask: React.FC = () => {
             ))}
           </View>
         </View>
-        <View className="ml-6 mt-5 gap-3">
+        <View className="mt-5 gap-3 items-center">
           <Text style={{ fontFamily: "PopBold" }}>Repeat</Text>
           <View className="bg-customWhite h-[200px] w-[370px] rounded-lg">
             <View className="m-5">

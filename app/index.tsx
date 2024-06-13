@@ -37,7 +37,7 @@ export default function Opening() {
   return (
     <SafeAreaView>
       <HomeBg />
-      <View className="w-[25rem] top-24 p-2 left-8">
+      <View className="w-indexTextW h-indexMainH justify-center p-2 left-8">
         <Text className="text-textMain" style={{ fontFamily: "PopRegular" }}>
           Do your tasks quickly and easy
         </Text>
@@ -45,9 +45,9 @@ export default function Opening() {
           Your tasks, your rules, our support.
         </Text>
       </View>
-      <View className="top-40 justify-center items-center gap-1">
+      <View className="justify-center items-center gap-1">
         <LoginBtn />
-        <TouchableOpacity className="top-2">
+        <TouchableOpacity onPress={() => router.push("screen/signUp/SignUp")}>
           <Text
             style={{
               fontFamily: "PopLight",

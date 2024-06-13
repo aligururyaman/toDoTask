@@ -63,7 +63,7 @@ export default function Login() {
   return (
     <SafeAreaView>
       <View>
-        <View className="justify-center items-center top-12 p-16 gap-4">
+        <View className="justify-center items-center h-loginTittleH p-16 gap-4">
           <Text
             style={{ fontFamily: "PopBold" }}
             className="text-customPink text-xl"
@@ -77,50 +77,60 @@ export default function Login() {
             Welcome back! Sign in using your social account or email to continue
           </Text>
         </View>
-        <View className="flex-row gap-10 justify-center">
-          <TouchableOpacity>
-            <View>
-              <Image source={require("../../utils/images/facebook.png")} />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View>
-              <Image source={require("../../utils/images/gmail.png")} />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View>
-              <Image source={require("../../utils/images/apple.png")} />
-            </View>
-          </TouchableOpacity>
+        <View className="justify-center -top-10">
+          <View className="flex-row justify-center gap-10">
+            <TouchableOpacity>
+              <View>
+                <Image source={require("../../utils/images/facebook.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View>
+                <Image source={require("../../utils/images/gmail.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View>
+                <Image source={require("../../utils/images/apple.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <Or />
         </View>
-        <Or />
-        <KeyboardAvoidingView behavior="padding">
-          <View className="justify-center items-center gap-8">
-            <TextInput
-              className="top-40 bg-white w-96 h-14 rounded-lg text-2xl p-4"
-              style={{ lineHeight: 25 }}
-              placeholder="Email"
-              onChangeText={(text) => setEmail(text)}
-              value={email}
-            />
 
-            <TextInput
-              className="top-40 bg-white w-96 h-14 rounded-lg text-2xl p-4"
-              style={{ lineHeight: 25 }}
-              placeholder="Şifre"
-              secureTextEntry
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-            />
-            <View className="top-48">
+        <KeyboardAvoidingView behavior="padding">
+          <View className="h-loginInputH justify-center items-center gap-8">
+            <View className="h-16 w-96 bg-customBgWhite rounded-lg justify-center p-4">
+              <TextInput
+                className="h-10 w-full text-2xl border-b border-b-gray-400 "
+                style={{
+                  lineHeight: 25,
+                }}
+                placeholder="Email"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+              />
+            </View>
+            <View className="h-16 w-96 bg-customBgWhite rounded-lg justify-center p-4">
+              <TextInput
+                className="h-10 w-full text-2xl border-b border-b-gray-400 "
+                style={{
+                  lineHeight: 25,
+                }}
+                placeholder="Password"
+                secureTextEntry
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+              />
+            </View>
+            <View>
               <SignInBtn
                 onPress={handleAuth}
                 loading={loading}
                 title={btnTitle}
               />
             </View>
-            <View className="top-44">
+            <View>
               <Text
                 style={{ fontFamily: "PopLight" }}
                 className="text-lg"

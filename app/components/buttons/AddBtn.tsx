@@ -10,7 +10,7 @@ export default function AddBtn() {
         onPress={() => route.push("screen/suggestions/Suggestions")}
       >
         <View
-          className="bg-customButton w-14 h-14 justify-center items-center rounded-full"
+          className="bg-customButton w-20 h-20 justify-center items-center rounded-full"
           style={{
             shadowColor: "#000",
             shadowOffset: {
